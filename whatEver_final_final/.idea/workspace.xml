@@ -73,7 +73,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../RDBMS/mysql-connector-java-5.1.48" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -135,6 +135,11 @@
       <workItem from="1592632303422" duration="3934000" />
       <workItem from="1592650095974" duration="9807000" />
       <workItem from="1592669145285" duration="9576000" />
+      <workItem from="1592739802559" duration="10020000" />
+      <workItem from="1592832609213" duration="3483000" />
+      <workItem from="1592906591311" duration="14035000" />
+      <workItem from="1592924879198" duration="2616000" />
+      <workItem from="1592927827277" duration="2628000" />
     </task>
     <servers />
   </component>
@@ -154,6 +159,10 @@
       <screen x="0" y="0" width="1304" height="768" />
     </state>
     <state x="401" y="221" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.0.1304.768@0.0.1304.768" timestamp="1592534384338" />
+    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1592930375089">
+      <screen x="0" y="0" width="1304" height="768" />
+    </state>
+    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1304.768@0.0.1304.768" timestamp="1592930375089" />
     <state x="406" y="100" key="DetectedRootsChooserDialog" timestamp="1592534673122">
       <screen x="0" y="0" width="1304" height="768" />
     </state>
@@ -162,22 +171,22 @@
       <screen x="0" y="0" width="1304" height="768" />
     </state>
     <state x="432" y="139" key="FileChooserDialogImpl/0.0.1304.768@0.0.1304.768" timestamp="1592534670904" />
-    <state width="1261" height="192" key="GridCell.Tab.0.bottom" timestamp="1592679443370">
+    <state width="1261" height="192" key="GridCell.Tab.0.bottom" timestamp="1592930573621">
       <screen x="0" y="0" width="1304" height="768" />
     </state>
-    <state width="1261" height="192" key="GridCell.Tab.0.bottom/0.0.1304.768@0.0.1304.768" timestamp="1592679443370" />
-    <state width="1261" height="192" key="GridCell.Tab.0.center" timestamp="1592679443370">
+    <state width="1261" height="192" key="GridCell.Tab.0.bottom/0.0.1304.768@0.0.1304.768" timestamp="1592930573621" />
+    <state width="1261" height="192" key="GridCell.Tab.0.center" timestamp="1592930573621">
       <screen x="0" y="0" width="1304" height="768" />
     </state>
-    <state width="1261" height="192" key="GridCell.Tab.0.center/0.0.1304.768@0.0.1304.768" timestamp="1592679443370" />
-    <state width="1261" height="192" key="GridCell.Tab.0.left" timestamp="1592679443370">
+    <state width="1261" height="192" key="GridCell.Tab.0.center/0.0.1304.768@0.0.1304.768" timestamp="1592930573621" />
+    <state width="1261" height="192" key="GridCell.Tab.0.left" timestamp="1592930573621">
       <screen x="0" y="0" width="1304" height="768" />
     </state>
-    <state width="1261" height="192" key="GridCell.Tab.0.left/0.0.1304.768@0.0.1304.768" timestamp="1592679443370" />
-    <state width="1261" height="192" key="GridCell.Tab.0.right" timestamp="1592679443370">
+    <state width="1261" height="192" key="GridCell.Tab.0.left/0.0.1304.768@0.0.1304.768" timestamp="1592930573621" />
+    <state width="1261" height="192" key="GridCell.Tab.0.right" timestamp="1592930573621">
       <screen x="0" y="0" width="1304" height="768" />
     </state>
-    <state width="1261" height="192" key="GridCell.Tab.0.right/0.0.1304.768@0.0.1304.768" timestamp="1592679443370" />
+    <state width="1261" height="192" key="GridCell.Tab.0.right/0.0.1304.768@0.0.1304.768" timestamp="1592930573621" />
     <state x="132" y="0" key="SettingsEditor" timestamp="1592536377868">
       <screen x="0" y="0" width="1304" height="768" />
     </state>

@@ -6,10 +6,16 @@ import java.sql.*;
 import static pr.whatEver.Environment.*;
 
 public class Suggestion implements Serializable {
+    private int resID;
     private int sgID = 0;
     private Long createDate;
     private int foodID;
 
+    /**
+     *
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public Suggestion() throws ClassNotFoundException, SQLException {
         createDate = System.currentTimeMillis();
         storeProcedure = CreateConnection().prepareCall("{call FoodCount(?)}");
@@ -25,6 +31,9 @@ public class Suggestion implements Serializable {
         storeProcedure.registerOutParameter(2, Types.VARCHAR);
         storeProcedure.registerOutParameter(3, Types.INTEGER);
         storeProcedure.execute();
+
+        CreateStatement().execute("insert into suggestion(userID, foodId, createTime) " +
+                "value (" + 2 + "," + foodID + "," + System.currentTimeMillis() + ");");
     }
 
     public FoodRepository ReturnFood() throws SQLException {

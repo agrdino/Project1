@@ -17,13 +17,14 @@ public class SystemController {
      */
     @GetMapping("/login")
     public int Login() throws SQLException, ClassNotFoundException {
-        CreateConnection();
-        storeProcedure = con.prepareCall("{call LoginPermission(?,?,?,?)}");
+        storeProcedure = CreateConnection().prepareCall("{call LoginPermission(?,?,?,?,?)}");
         storeProcedure.setString(1,"admin");
         storeProcedure.setInt(2, 1);
         storeProcedure.registerOutParameter(3, Types.INTEGER);
         storeProcedure.registerOutParameter(4, Types.INTEGER);
+        storeProcedure.registerOutParameter(5, Types.INTEGER);
         storeProcedure.execute();
+        userID = storeProcedure.getInt(5);
         return storeProcedure.getInt(3) + storeProcedure.getInt(4);
     }
 }

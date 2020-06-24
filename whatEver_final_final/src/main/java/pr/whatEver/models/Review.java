@@ -3,16 +3,26 @@ import java.sql.SQLException;
 import static pr.whatEver.Environment.*;
 
 public class Review {
+    private int rcID;
     private int sgID;
     private int rate;
     private long createTime;
     private boolean recommend;
     private String review;
 
-    public Review(int sgID, int rate, long createTime, boolean recommend, String review) throws SQLException, ClassNotFoundException {
+    /**
+     *
+     * @param sgID
+     * @param rate
+     * @param recommend
+     * @param review
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    public Review(int sgID, int rate, boolean recommend, String review) throws SQLException, ClassNotFoundException {
         this.sgID = sgID;
         this.rate = setRate(rate);
-        this.createTime = createTime;
+        this.createTime = System.currentTimeMillis();
         this.recommend = recommend;
         this.review = review;
 
@@ -24,6 +34,18 @@ public class Review {
         storeProcedure.setBoolean(5, getRecommend());
         storeProcedure.execute();
     }
+
+    public Review(int sgID, int rate, long createTime, boolean recommend, String review) {
+        this.sgID = sgID;
+        this.rate = setRate(rate);
+        this.createTime = createTime;
+        this.recommend = recommend;
+        this.review = review;
+
+
+    }
+
+    public Review(){}
 
     public boolean getRecommend(){
         return recommend;

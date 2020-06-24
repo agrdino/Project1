@@ -9,6 +9,13 @@ public class Food {
     private String name;
     private int price;
 
+    /**
+     * Food model
+     * @param name
+     * @param price
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public Food(String name, int price) throws SQLException, ClassNotFoundException {
         this.name = name;
         this.price = price;

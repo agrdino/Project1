@@ -5,6 +5,9 @@ public class ReviewRepository{
         public int rate;
         public boolean recommend;
         public String review;
+
+        public ReviewRepository(){}
+
         public int getSgID() {
                 return sgID;
         }
