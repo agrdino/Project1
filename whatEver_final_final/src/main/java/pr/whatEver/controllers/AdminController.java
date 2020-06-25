@@ -117,24 +117,37 @@ public class AdminController{
         }
         return listRvC;
     }
+
     @PostMapping("/confirm-review")
-    public @ResponseBody void ConfirmReview(@RequestBody ReviewID rcID) throws SQLException {
+    public void ConfirmReview(@RequestBody ReviewID rcID) throws SQLException {
+        String s = "";
         ResultSet resultSet =  CreateStatement().executeQuery("select * from reviewCheck where reviewCheck.rcID = " + rcID.getRcID() + ";");
-        while (resultSet.next()) {
-            CreateStatement().execute(
-                    "insert into review(sgId, userID, foodID, resID, createTime, rate, recommend, revieww) " +
-                            "value(" + resultSet.getInt(2) + "," +
-                            resultSet.getInt(3) + "," +
-                            resultSet.getInt(4) + "," +
-                            resultSet.getInt(5) + "," +
-                            resultSet.getLong(6) + "," +
-                            resultSet.getInt(7) + "," +
-                            resultSet.getBoolean(8) + "," + "\"" +
-                            resultSet.getString(9) + "\");"
-            );
+        while(resultSet.next()) {
+            s = "insert into review(sgId, userID, foodID, resID, createTime, rate, recommend, revieww) " +
+                    "value(" + resultSet.getInt(2) + "," +
+                    resultSet.getInt(3) + "," +
+                    resultSet.getInt(4) + "," +
+                    resultSet.getInt(5) + "," +
+                    resultSet.getLong(6) + "," +
+                    resultSet.getInt(7) + "," +
+                    resultSet.getBoolean(8) + "," + "\"" +
+                    resultSet.getString(9) + "\");";
         }
-
+        CreateStatement().execute(s);
+//            CreateStatement().execute(
+//                    "insert into review(sgId, userID, foodID, resID, createTime, rate, recommend, revieww) " +
+//                            "value(" + resultSet.getInt(2) + "," +
+//                            resultSet.getInt(3) + "," +
+//                            resultSet.getInt(4) + "," +
+//                            resultSet.getInt(5) + "," +
+//                            resultSet.getLong(6) + "," +
+//                            resultSet.getInt(7) + "," +
+//                            resultSet.getBoolean(8) + "," + "\"" +
+//                            resultSet.getString(9) + "\");"
+//            );
         CreateStatement().execute("delete from reviewCheck where reviewCheck.rcID =" + rcID.getRcID());
-        }
     }
+    public void DeleteReviewCheck(){
 
+    }
+}

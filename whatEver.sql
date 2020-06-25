@@ -12,7 +12,7 @@ admin bool
 create table food
 (
 foodID int primary key auto_increment,
-name varchar(50),
+name varchar(50) unique,
 price int
 );
 
@@ -130,13 +130,13 @@ select rw.rcID, u.name, f.name, rw.resID, res.name as resname, rw.revieww, rw.ra
                         
 select * from reviewCheck;
 select * from reviewCheck;
-insert into reviewCheck (sgID, userID, foodID, resID, revieww) value (2,2,4,2,"test again1");
+insert into reviewCheck (sgID, userID, foodID, resID, revieww) value (2,2,4,2,"test again2");
 select * from review;
 select * from reviewCheck;
+
 select * from suggestionOffical;
 
 -- back up
-
 -- add food
 CREATE DEFINER=`root`@`localhost` PROCEDURE `AddFood`(in foodName varchar(50), in foodPrice int)
 BEGIN
@@ -145,6 +145,37 @@ BEGIN
     then
 		insert into food(name, price) value (`foodName`, `foodPrice`);
     end if;
+END
+
+-- add menu
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AddMenu`(in foodID int, in resID int)
+BEGIN
+	if ((select mn.resID from menu mn where mn.foodID = `foodID`) is not null
+    and (select mn.resID from menu mn where mn.foodID = `foodID`) = `resID`)
+    then
+		select * from menu where menu.foodID = `foodID`;
+	else
+		insert into menu(resID, foodID) value(`resID`, `foodID`);
+	end if;
+END
+
+-- add restaurant
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AddRestaurant`(in name varchar(50), in address varchar(255), in openHour long, in closeHour long)
+BEGIN
+	if ((select res.address from restaurant res where res.name = `name`) is not null)
+    and ((select res.address from restaurant res where res.name = `name`) = `address`)
+    then
+		select * from restaurant where restaurant.name = `name`;
+    else
+		insert into restaurant(name, address, openHour, closeHour) value (`name`, `address`, `openHour`, `closeHour`);
+	end if;
+END
+
+
+-- add sg official
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AddSuggestionOffical`(in sgID int, in resID int)
+BEGIN
+	insert into suggestionOffical(sgID, resID) value(`sgID`, `resID`);
 END
 
 
@@ -181,36 +212,27 @@ BEGIN
 END
 
 
--- get restaurant
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GetRestaurant`(in foodID int)
+-- get menu
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetMenu`(in foodID int, in resID int, out foodName varchar(50), out resName varchar(50))
 BEGIN
-	select * from restaurant res inner join menu where menu.foodID = `foodID`;    
+	set `foodName` = (select name from food where food.foodID = `foodID`);
+    set `resName` = (select name from restaurant where restaurant.resID = `resID`);
 END
 
 
--- login permission
-CREATE DEFINER=`root`@`localhost` PROCEDURE `LoginPermission`(in userName varchar(50), in mobileNumber int, out result int, out admin int)
+-- get restaurant
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetRestaurant`(in name varchar(50), out resID int, out resName varchar(50), out address varchar(255), out openHour long, out closeHour long)
 BEGIN
-	if ((select name from user where user.mobileNumber = `mobileNumber`) is not null)
-    then
-		if ((select name from user where user.mobileNumber = `mobileNumber`) = `userName`)
-        then set result = 1;
-			 set `admin` = (select u.admin from user u where u.mobileNumber = `mobileNumber`);
-        else set result = 0;
-			 set `admin` = 0;
-        end if;
-	else set result = 0;
-    end if;
-ENDCREATE DEFINER=`root`@`localhost` PROCEDURE `LoginPermission`(in userName varchar(50), in mobileNumber int, out result int, out admin int)
+	set `resID` = (select res.resID from restaurant res where res.name = `name` and res.openHour <= hour(now()) and res.closeHour >= hour(now()));
+	set `resName` = (select res.name from restaurant res where res.name = `name` and res.openHour <= hour(now()) and res.closeHour >= hour(now()));
+	set `address` = (select res.address from restaurant res where res.name = `name` and res.openHour <= hour(now()) and res.closeHour >= hour(now()));
+	set `openHour` = (select res.openHour from restaurant res where res.name = `name` and res.openHour <= hour(now()) and res.closeHour >= hour(now()));
+	set `closeHour` = (select res.closeHour from restaurant res where res.name = `name` and res.openHour <= hour(now()) and res.closeHour >= hour(now()));
+END
+
+
+-- get review
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetReview`(in rcID int)
 BEGIN
-	if ((select name from user where user.mobileNumber = `mobileNumber`) is not null)
-    then
-		if ((select name from user where user.mobileNumber = `mobileNumber`) = `userName`)
-        then set result = 1;
-			 set `admin` = (select u.admin from user u where u.mobileNumber = `mobileNumber`);
-        else set result = 0;
-			 set `admin` = 0;
-        end if;
-	else set result = 0;
-    end if;
+	select * from reviewCheck where reviewCheck.rcID = `rcID`;
 END
